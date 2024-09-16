@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Baniqia Private School</title>
+  <link rel="icon" href="icon/favicon.ico" type="image/x-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=San+Francisco&display=swap');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'San Francisco', sans-serif;
+      background-image: url('images/photo_4_2024-09-13_20-55-08.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #000000;
+      overflow: hidden;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      color: #ffffff;
+      text-shadow: 0 0 5px #666666, 0 0 10px #999999, 0 0 15px #cccccc;
+    }
+
+    .content {
+      padding: 40px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+    .content h2 {
+      margin-top: 0;
+      font-size: 2.5em;
+      color: #000000;
+      text-shadow: 0 0 5px #666666, 0 0 10px #999999, 0 0 15px #cccccc;
+    }
+
+    .content p {
+      font-size: 1.5em;
+      color: #000000;
+      padding: 20px;
+    }
+
+    #menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    #menu-toggle div {
+      width: 30px;
+      height: 3px;
+      background-color: #f9f8f8; /* Dark gray color */
+      margin: 6px 0;
+      transition: 0.3s;
+    }
+
+    #button-container {
+      position: fixed;
+      top: 60px; /* Adjust as needed */
+      right: 20px;
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 1000;
+    }
+
+    #button-container button {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      background: #009688;
+      color: #ffffff;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      width: 200px;
+      text-align: center;
+    }
+
+    #button-container button:hover {
+      background: #004D40;
+      transform: scale(1.05);
+    }
+
+    #menu-toggle.active div:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    #menu-toggle.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    #menu-toggle.active div:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .contact-info {
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-info h3 {
+      font-size: 2em;
+      color: #000000;
+    }
+
+    .contact-info p {
+      font-size: 1.2em;
+      color: #000000;
+    }
+
+    .contact-info a {
+      color: #009688;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .circle-container {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .circle-button {
+      width: 80px;
+      height: 80px;
+      background-color: #009688;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .circle-button img {
+      width: 100%; /* Make the image fill the button */
+      height: 100%;
+      object-fit: cover; /* Ensure the image scales to fit without distortion */
+      border-radius: 50%; /* Make the image circular */
+    }
+
+    .circle-button:hover {
+      transform: scale(1.1);
+    }
+
+    .info-panel {
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      background-color: rgba(255, 255, 255, 0.9);
+      height: 50px;
+      border-radius: 5px;
+      overflow: hidden;
+      transition: width 0.5s ease, opacity 0.5s ease;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
+      opacity: 0;
+    }
+
+    .info-panel p {
+      margin: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .info-panel.open {
+      width: 250px;
+      opacity: 1;
+    }
+
+    .info-panel.open p {
+      opacity: 1;
+    }
+
+    /* Additional button for Facebook (repeat styling with appropriate image) */
+    .circle-button.facebook {
+      background-image: url("images/e44a55eb-b33a-4334-a756-b75fa05b62a3.jpg");  /* Replace with your Facebook icon image path */
+    }
+
+    /* Map Styles */
+    .map-container {
+      position: relative;
+      margin: 20px auto;
+      max-width: 60%;
+      height: 465px; /* Adjusted height */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      margin-top: 80px; /* Move map down to avoid overlap */
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Responsive adjustments for mobile devices */
+    @media (max-width: 768px) {
+      .circle-button {
+        width: 60px; /* Smaller width for mobile devices */
+        height: 60px; /* Smaller height for mobile devices */
+      }
+    }
+
+    /* Trademark Styles */
+    #trademark {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 0.8em;
+      color: #ffffff;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="menu-toggle">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div id="button-container">
+    <button id="home-button" onclick="window.location.href='index.html'">Home</button>
+    <button id="admissions-button" onclick="window.location.href='Admissions.html'">Admissions</button>
+    <button id="about-button" onclick="window.location.href='Aboutus.html'">About Us</button>
+    <button id="contact-button" onclick="window.location.href='Contactus.html'">Contact Us</button>
+  </div>
+
+  <header>
+    <h1>Contact us</h1>
+  </header>
+
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2690.609146794806!2d44.342823629050295!3d32.035313361370084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x155968f0380501ab%3A0xb6a9ff82d69b7cfd!2z2KfZhdmI2K7YsdmE2KfYp9mE2KfYp9mI!5e0!3m2!1sen!2siq!4v1693838239057!5m2!1sen!2siq" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+  <div class="circle-container">
+    <div class="circle-button" onclick="togglePanel('phone-panel')">
+      <img src="images/logo-telephone-vector-illustration.jpg" alt="Phone Icon">
+      <div id="phone-panel" class="info-panel">
+        <a href="tel:+9647714690247">Phone Number: +9647714690247</a>
+      </div>
+    </div>
+    <div class="circle-button facebook" onclick="togglePanel('facebook-panel')">
+      <img src="images/e44a55eb-b33a-4334-a756-b75fa05b62a3.jpg" alt="Facebook Icon">
+      <div id="facebook-panel" class="info-panel">
+        <p><a href="https://www.facebook.com/BaniqiaSchools/" target="_blank">Visit our Facebook page</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="trademark">© Designed by Hussein Raheem Al-Abedi</div>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const buttonContainer = document.getElementById('button-container');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      buttonContainer.style.display = buttonContainer.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    function togglePanel(panelId) {
+      const panel = document.getElementById(panelId);
+      panel.classList.toggle('open');
+    }
+  </script>
+    
+</body>
+</html>

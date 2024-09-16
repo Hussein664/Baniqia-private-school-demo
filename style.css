@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f0f0;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+}
+
+.expanding-button {
+    width: 100px; /* Adjust as needed */
+    height: 300px; /* Initial height, adjust as needed */
+    border: none;
+    border-radius: 10px;
+    background-image: url('your-image.jpg'); /* Replace with your image */
+    background-size: cover;
+    background-position: center;
+    color: transparent;
+    font-size: 1.5em;
+    cursor: pointer;
+    position: relative;
+    transition: height 0.3s ease, transform 0.3s ease;
+}
+
+.expanding-button:hover,
+.expanding-button:focus {
+    height: 500px; /* Expanded height, adjust as needed */
+    transform: scale(1.05); /* Slightly enlarges the button */
+}
+
+.expanding-button:after {
+    content: attr(id);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 1.2em;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.expanding-button:hover:after,
+.expanding-button:focus:after {
+    opacity: 1;
+}
